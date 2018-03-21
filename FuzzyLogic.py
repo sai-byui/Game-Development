@@ -1,143 +1,32 @@
-# import os
-# import time
-import random
 import pygame
-import math
+from Actors.Actor import Actor
+from Actors.Mage import Mage
+from Actors.Warrior import Warrior
+from Actors.Archer import Archer
+from Actors.Faction import Faction
 
-
-class Actor:
-
-    actors_list = []
-
-    def __init__(self, x, y, player = False):
-        self.x = x
-        self.y = y
-        self.hit_points = 100
-        self.magic_load = 1.0
-        self.healthy = 1.0
-        self.mana = 100
-        self.coverage = 0.0
-        self.accuracy = random.uniform(0.5, 1)
-        self.strength = random.randint(5, 15)
-        self.power = random.randint(10, 15)
-        self.armor_class = random.uniform(0.5, 1)
-        self.damage_reduction = random.randint(0, 3)
-        self.rect = pygame.Rect(x, y, 16, 16)
-        self.attack_speed = 120
-        self.frame_count = 0
-        self.name = ""
-        if player:
-            self.name = input("What is your name?")
-
-        Actor.actors_list.append(self)
-
-    def set_healthy(self, hit_points):
-        self.healthy = hit_points * .01
-
-    def set_magic_load(self, mana):
-        self.magic_load = mana * .01
-
-    def take_damage(self, amt):
-        if amt > 0:
-            self.hit_points -= amt
-            self.set_healthy(self.hit_points)
-            print(self.name + ", you've been hit for " + str(amt) + " damage!")
-            print(self.name + " health: " + str(self.hit_points))
-
-    def get_physical_damage(self):
-        return random.randint(self.strength - 2, self.strength + 2)
-
-    def get_magical_damage(self):
-        return random.randint(self.power - 2, self.power + 2)
-
-    def drink_potion(self):
-        self.hit_points += 30
-        self.set_healthy(self.hit_points)
-        print(self.name + " is Drinking health juice!")
-
-    def get_distance_to_object(self, obj):
-        return math.sqrt((self.x - obj.x) ** 2 + (self.y - obj.y) ** 2)
-
-    def set_x(self, pos):
-        self.x = pos
-        self.rect.x = pos
-
-    def set_y(self, pos):
-        self.y = pos
-        self.rect.y = pos
-
-    # def hide(self):
-    #     print(self.name + " is Running and Hiding")
-    #     self.coverage = 1
-    #
-    # def return_to_fight(self):
-    #     self.coverage = 0.0
-    #     print(self.name + " is Coming back out to fight!")
-
-class Mage(Actor):
-
-    def magic_attack(self, target):
-        print(self.name + " is attacking with magic!")
-        if random.uniform(self.accuracy, 1) > random.uniform(target.armor_class, 1):
-            target.take_damage(self.get_magical_damage() - target.damage_reduction)
-            self.mana -= 20
-            self.set_magic_load(self.mana)
-        else:
-            print(self.name + " missed!")
-        self.frame_count = self.attack_speed
-
-    def physical_attack(self, target):
-        print(self.name + " is Slapping with hand!")
-        if random.uniform(self.accuracy, 1) > random.uniform(target.armor_class, 1):
-            target.take_damage(self.get_physical_damage() - target.damage_reduction)
-        else:
-            print(self.name + " missed!")
-        self.frame_count = self.attack_speed
-
-class Warrior(Actor):
-    def __init__(self):
-        super(Warrior, self).__init__()
-        self.rage = 0.0  # fuzzy
-
-    def physical_attack(self, target):
-        print(self.name + " is Slapping with hand!")
-        if random.uniform(self.accuracy, 1) > random.uniform(target.armor_class, 1):
-            target.take_damage(self.get_physical_damage() - target.damage_reduction)
-        else:
-            self.rage += 0.3
-            print(self.name + " missed!")
-        self.frame_count = self.attack_speed
-
-    def special_attack(self, target):
-        print(self.name + " is using special attack!")
-        if random.uniform(self.accuracy, 1) > random.uniform(target.armor_class, 1):
-            target.take_damage(int(self.get_physical_damage() * 1.5 - target.damage_reduction))
-        else:
-            print(self.name + " missed!")
-        self.rage = 0.0
-
-class Archer(Actor):
-    def physical_attack(self, target):
-        print(self.name + " is Slapping with hand!")
-        if random.uniform(self.accuracy, 1) > random.uniform(target.armor_class, 1):
-            target.take_damage(self.get_physical_damage() - target.damage_reduction)
-        else:
-            print(self.name + " missed!")
-        self.frame_count = self.attack_speed
 
 def main():
-    hero = Mage(20, 20, True)
-    enemy1 = Archer(1000, 100)
-    enemy2 = Warrior(500, 400)
+    factions = []
+    factions.append(Faction("Good guys"))
+    factions[0].interactions.append(["Baddies", -10.0])
+    factions.append(Faction("Baddies"))
+    factions[1].interactions.append(["Good guys", -10.0])
 
+    hero = Mage(20, 20, "", True)
+    hero.factions.append(factions[0])
+    enemy1 = Archer(1000, 100, "Enemy 1")
+    enemy1.factions.append(factions[1])
+    enemy2 = Warrior(500, 400, "Enemy 2")
+    enemy2.factions.append(factions[1])
 
     pygame.init()
     screen = pygame.display.set_mode((1116, 444))
 
     clock = pygame.time.Clock()
-
+    running = True
     # This loop implements different actions based on the fuzzy logic
-    while enemy1.hit_points > 0 and hero.hit_points > 0:
+    while running:
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
                 running = False
@@ -187,8 +76,9 @@ def main():
 
         screen.fill((0, 0, 0))
 
-        pygame.draw.rect(screen, (255, 0, 0), hero.rect)
-        pygame.draw.rect(screen, (0, 0, 255), enemy1.rect)
+        for actor in Actor.actors_list:
+            pygame.draw.rect(screen, actor.current_color, actor.rect)
+
         pygame.display.flip()
 
         clock.tick(60)

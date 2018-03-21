@@ -4,9 +4,9 @@ import os
 import random
 import pygame
 
-# Class for the orange dude
+
 class Player(object):
-    
+    """Class for the orange dude"""
     def __init__(self):
         self.rect = pygame.Rect(32, 32, 16, 16)
 
@@ -27,18 +27,18 @@ class Player(object):
         # If you collide with a wall, move out based on velocity
         for wall in walls:
             if self.rect.colliderect(wall.rect):
-                if dx > 0: # Moving right; Hit the left side of the wall
+                if dx > 0:  # Moving right; Hit the left side of the wall
                     self.rect.right = wall.rect.left
-                if dx < 0: # Moving left; Hit the right side of the wall
+                if dx < 0:  # Moving left; Hit the right side of the wall
                     self.rect.left = wall.rect.right
-                if dy > 0: # Moving down; Hit the top side of the wall
+                if dy > 0:  # Moving down; Hit the top side of the wall
                     self.rect.bottom = wall.rect.top
-                if dy < 0: # Moving up; Hit the bottom side of the wall
+                if dy < 0:  # Moving up; Hit the bottom side of the wall
                     self.rect.top = wall.rect.bottom
 
-# Nice class to hold a wall rect
+
 class Wall(object):
-    
+    """Nice class to hold a wall rect"""
     def __init__(self, pos):
         walls.append(self)
         self.rect = pygame.Rect(pos[0], pos[1], 16, 16)
@@ -52,26 +52,26 @@ pygame.display.set_caption("Get to the red square!")
 screen = pygame.display.set_mode((320, 240))
 
 clock = pygame.time.Clock()
-walls = [] # List to hold the walls
-player = Player() # Create the player
+walls = []  # List to hold the walls
+player = Player()  # Create the player
 
 # Holds the level layout in a list of strings.
 level = [
-"WWWWWWWWWWWWWWWWWWWW",
-"W                  W",
-"W                  W",
-"W                  W",
-"W                  W",
-"W                  W",
-"W                  W",
-"W                  W",
-"W                  W",
-"W                  W",
-"W                  W",
-"W                  W",
-"W                  W",
-"W                 EW",
-"WWWWWWWWWWWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWW",
+    "W                  W",
+    "W                  W",
+    "W                  W",
+    "W                  W",
+    "W                  W",
+    "W                  W",
+    "W                  W",
+    "W                  W",
+    "W                  W",
+    "W                  W",
+    "W                  W",
+    "W                  W",
+    "W                 EW",
+    "WWWWWWWWWWWWWWWWWWWW",
 ]
 
 # Parse the level string above. W = wall, E = exit
@@ -90,8 +90,7 @@ running = True
 while running:
     
     clock.tick(60)
-	
-    
+
     for e in pygame.event.get():
         if e.type == pygame.QUIT:
             running = False
@@ -108,11 +107,10 @@ while running:
         player.move(0, -2)
     if key[pygame.K_DOWN]:
         player.move(0, 2)
-		
-	
+
     # Just added this to make it slightly fun ;)
     if player.rect.colliderect(end_rect):
-        raise SystemExit, "You win!"
+        raise(SystemExit, "You win!")
     
     # Draw the scene
     screen.fill((0, 0, 0))
