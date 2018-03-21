@@ -23,19 +23,20 @@ class Warrior(Actor):
                 current_action = Behavior("Attack!", self.physical_attack, [self.current_target])
         return current_action
 
-    def physical_attack(self, target):
+    def physical_attack(self, params):
         print(self.name + " is Slapping with hand!")
-        if random.uniform(self.accuracy, 1) > random.uniform(target.armor_class, 1):
-            target.take_damage(self.get_physical_damage() - target.damage_reduction)
+        if random.uniform(self.accuracy, 1) > random.uniform(params[0].armor_class, 1):
+            params[0].take_damage(self.get_physical_damage() - params[0].damage_reduction)
         else:
             self.rage += 0.3
             print(self.name + " missed!")
         self.frame_count = self.attack_speed
+        return True
 
-    def special_attack(self, target):
+    def special_attack(self, params):
         print(self.name + " is using special attack!")
-        if random.uniform(self.accuracy, 1) > random.uniform(target.armor_class, 1):
-            target.take_damage(int(self.get_physical_damage() * 1.5 - target.damage_reduction))
+        if random.uniform(self.accuracy, 1) > random.uniform(params[0].armor_class, 1):
+            params[0].take_damage(int(self.get_physical_damage() * 1.5 - params[0].damage_reduction))
         else:
             print(self.name + " missed!")
         self.rage = 0.0

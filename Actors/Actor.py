@@ -25,7 +25,7 @@ class Actor:
         self.attack_speed = 120
         self.frame_count = 0
         self.current_color = (255, 0, 0)
-        self.current_action = []
+        self.current_action = None
         self.name = name
         self.frames_since_behavior_decided = 0
         self.current_max_attack_range = 5  # Determined by whether the char can currently make a ranged attack
@@ -38,15 +38,16 @@ class Actor:
 
     def act(self):
         self.frames_since_behavior_decided += 1
-        if self.current_action == [] or self.frames_since_behavior_decided >= 500:
+        if self.current_action is None or self.frames_since_behavior_decided >= 20:
             self.current_action = self.decide_behavior()
-        self.current_action.perform_action()
+        if self.current_action.perform_action(self):
+            self.current_action = None
 
-    def approach(self, x, y, to_within):
-        if distance((self.x, self.y), (x, y)) > to_within:
-            dist = distance((self.x, self.y), (x, y))
-            x_movement = ((x - self.x) / dist)
-            y_movement = ((y - self.y) / dist)
+    def approach(self, params):
+        if distance((self.x, self.y), (params[0], params[1])) > params[2]:
+            dist = distance((self.x, self.y), (params[0], params[1]))
+            x_movement = ((params[0] - self.x) / dist)
+            y_movement = ((params[1] - self.y) / dist)
             self.x += x_movement
             self.y += y_movement
             self.rect.x = int(self.x)
@@ -67,7 +68,7 @@ class Actor:
     def attempt_heal_behavior(self, current_action):
         if self.health_potion_remaining > 0:
             if self.healthy < 1.0:
-                return Behavior("Heal", self.heal_self, [self.max_hit_points - self.hit_points])
+                return Behavior("Heal", self.heal_self)
         return current_action
 
     def attempt_hide_behavior(self, current_action):  # Implement later, after walls and pathfinding
@@ -75,33 +76,40 @@ class Actor:
 
     def check_for_targets(self):
         for actor in Actor.actors_list:
+            if actor == self:
+                continue
+
+            if actor.is_dead():
+                continue
+
             if self.current_target is None:
                 self.current_target = actor
-            elif self.is_hostile_towards(self.current_target):
+            elif isinstance(self.current_target, Actor) and self.is_hostile_towards(self.current_target):
                 if self.is_hostile_towards(actor) \
                         and self.get_distance_to_object(actor) < self.get_distance_to_object(self.current_target):
                     self.current_target = actor
+            else:
+                self.current_target = None
 
     def decide_behavior(self):
-        # print("****************************************************************************")
-        # print("ERROR: method decide_behavior must be implemented in child classes of Actor.")
-        # print("****************************************************************************")
-        # exit(1)
-
         self.frames_since_behavior_decided = 0
 
-        if self.current_target is None:
-            self.check_for_targets()
+        self.check_for_targets()
 
-        current_action = Behavior("Do nothing", self.do_nothing())
+        current_action = Behavior("Do nothing", self.do_nothing)
         current_action = self.attempt_heal_behavior(current_action)
         current_action = self.attempt_hide_behavior(current_action)
         if self.current_target is not None and self.is_hostile_towards(self.current_target):
             current_action = self.attempt_attack_behavior(current_action)
         return current_action
 
-    def do_nothing(self):  # Dummy function to use as a callback
-        pass
+    def do_nothing(self, params):  # Dummy function to use as a callback
+        return True
+
+    def draw(self, screen):
+        pygame.draw.rect(screen, self.current_color, self.rect)
+        font = pygame.font.SysFont('Arial', 25)
+        screen.blit(font.render(self.name, True, (255, 255, 255)), (self.x, self.y + 20))
 
     def get_distance_to_object(self, obj):
         return distance((self.x, self.y), (obj.x, obj.y))
@@ -112,10 +120,15 @@ class Actor:
     def get_physical_damage(self):
         return random.randint(self.strength - 2, self.strength + 2)
 
-    def heal_self(self, amt):
-        self.hit_points += amt
+    def heal_self(self, params):
+        amt_to_heal = self.max_hit_points - self.hit_points
+        if amt_to_heal > self.health_potion_remaining:
+            amt_to_heal = self.health_potion_remaining
+        self.hit_points += amt_to_heal
+        self.health_potion_remaining -= amt_to_heal
         self.set_healthy()
         print(self.name + " is Drinking health juice!")
+        return True
 
     def is_hostile_towards(self, actor):
         total_standing = 0.0

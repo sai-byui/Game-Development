@@ -77,7 +77,7 @@ def main():
         screen.fill((0, 0, 0))
 
         for actor in Actor.actors_list:
-            pygame.draw.rect(screen, actor.current_color, actor.rect)
+            actor.draw(screen)
 
         pygame.display.flip()
 

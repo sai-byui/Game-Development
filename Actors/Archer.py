@@ -36,18 +36,23 @@ class Archer(Actor):
                     current_action = Behavior("Attack!", self.physical_attack, [self.current_target])
         return current_action
 
-    def physical_attack(self, target):
-        print(self.name + " is Slapping with hand!")
-        if random.uniform(self.accuracy, 1) > random.uniform(target.armor_class, 1):
-            target.take_damage(self.get_physical_damage() - target.damage_reduction)
-        else:
-            print(self.name + " missed!")
-        self.frame_count = self.attack_speed
+    def get_ranged_damage(self):
+        return self.get_physical_damage()
 
-    def ranged_attack(self, target):
-        print(self.name + " is shooting with arrow!")
-        if random.uniform(self.accuracy, 1) > random.uniform(target.armor_class, 1):
-            target.take_damage(self.get_ranged_damage() - target.damage_reduction)
+    def physical_attack(self, params):
+        print(self.name + " is Slapping with hand!")
+        if random.uniform(self.accuracy, 1) > random.uniform(params[0].armor_class, 1):
+            params[0].take_damage(self.get_physical_damage() - params[0].damage_reduction)
         else:
             print(self.name + " missed!")
         self.frame_count = self.attack_speed
+        return True
+
+    def ranged_attack(self, params):
+        print(self.name + " is shooting with arrow!")
+        if random.uniform(self.accuracy, 1) > random.uniform(params[0].armor_class, 1):
+            params[0].take_damage(self.get_ranged_damage() - params[0].damage_reduction)
+        else:
+            print(self.name + " missed!")
+        self.frame_count = self.attack_speed
+        return True

@@ -38,23 +38,25 @@ class Mage(Actor):
                     current_action = Behavior("Attack!", self.physical_attack, [self.current_target])
         return current_action
 
-    def magic_attack(self, target):
+    def magic_attack(self, params):
         print(self.name + " is attacking with magic!")
-        if random.uniform(self.accuracy, 1) > random.uniform(target.armor_class, 1):
-            target.take_damage(self.get_magical_damage() - target.damage_reduction)
+        if random.uniform(self.accuracy, 1) > random.uniform(params[0].armor_class, 1):
+            params[0].take_damage(self.get_magical_damage() - params[0].damage_reduction)
             self.mana -= 20
             self.set_magic_load()
         else:
             print(self.name + " missed!")
         self.frame_count = self.attack_speed
+        return True
 
-    def physical_attack(self, target):
+    def physical_attack(self, params):
         print(self.name + " is Slapping with hand!")
-        if random.uniform(self.accuracy, 1) > random.uniform(target.armor_class, 1):
-            target.take_damage(self.get_physical_damage() - target.damage_reduction)
+        if random.uniform(self.accuracy, 1) > random.uniform(params[0].armor_class, 1):
+            params[0].take_damage(self.get_physical_damage() - params[0].damage_reduction)
         else:
             print(self.name + " missed!")
         self.frame_count = self.attack_speed
+        return True
 
     def set_magic_load(self):
         self.magic_load = float(self.mana) / float(self.max_mana)
