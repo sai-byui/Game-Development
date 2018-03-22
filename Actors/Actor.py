@@ -130,6 +130,9 @@ class Actor:
         print(self.name + " is Drinking health juice!")
         return True
 
+    def is_dead(self):
+        return self.hit_points <= 0
+
     def is_hostile_towards(self, actor):
         total_standing = 0.0
         num_standings = 0.0

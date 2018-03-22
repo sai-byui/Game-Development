@@ -55,4 +55,5 @@ class Archer(Actor):
         else:
             print(self.name + " missed!")
         self.frame_count = self.attack_speed
+        self.num_arrows -= 1
         return True

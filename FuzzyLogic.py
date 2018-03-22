@@ -34,6 +34,9 @@ def main():
                 running = False
 
         for actor in Actor.actors_list:
+            if actor.is_dead():
+                continue
+
             if actor.frame_count == 0:
                 actor.act()
             else:
