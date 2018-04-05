@@ -9,7 +9,7 @@ class Archer(Actor):
         self.num_arrows = 10
 
     def attempt_attack_behavior(self, current_action):
-        if self.healthy > 0.4:
+        if self.healthy > 0.4 or self.health_potion_remaining == 0:
             if self.num_arrows >= 1:
                 if self.get_distance_to_object(self.current_target) > 50:
                     approach_action = self.attempt_approach_action(None, 50)

@@ -9,7 +9,7 @@ class Warrior(Actor):
         self.rage = 0.0  # fuzzy
 
     def attempt_attack_behavior(self, current_action):
-        if self.healthy > 0.4:
+        if self.healthy > 0.4 or self.health_potion_remaining == 0:
             if self.get_distance_to_object(self.current_target) > 10:
                 approach_action = self.attempt_approach_action(None, 10)
                 if approach_action is not None:

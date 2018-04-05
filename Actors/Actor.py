@@ -75,6 +75,7 @@ class Actor:
         return current_action
 
     def check_for_targets(self):
+        self.current_target = None
         for actor in Actor.actors_list:
             if actor == self:
                 continue
@@ -88,8 +89,6 @@ class Actor:
                 if self.is_hostile_towards(actor) \
                         and self.get_distance_to_object(actor) < self.get_distance_to_object(self.current_target):
                     self.current_target = actor
-            else:
-                self.current_target = None
 
     def decide_behavior(self):
         self.frames_since_behavior_decided = 0
@@ -131,7 +130,7 @@ class Actor:
         return True
 
     def is_dead(self):
-        return self.hit_points <= 0
+        return self.healthy <= 0.0
 
     def is_hostile_towards(self, actor):
         total_standing = 0.0

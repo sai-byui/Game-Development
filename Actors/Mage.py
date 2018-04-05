@@ -11,7 +11,7 @@ class Mage(Actor):
         self.magic_load = 1.0
 
     def attempt_attack_behavior(self, current_action):
-        if self.healthy > 0.4:
+        if self.healthy > 0.4 or self.health_potion_remaining == 0:
             if self.mana >= 20:
                 if self.get_distance_to_object(self.current_target) > 50:
                     approach_action = self.attempt_approach_action(None, 50)
