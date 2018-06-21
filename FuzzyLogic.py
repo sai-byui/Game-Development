@@ -4,6 +4,7 @@ from Actors.Mage import Mage
 from Actors.Warrior import Warrior
 from Actors.Archer import Archer
 from Actors.Faction import Faction
+from _thread import start_new_thread
 
 
 def main():
@@ -38,44 +39,9 @@ def main():
                 continue
 
             if actor.frame_count == 0:
-                actor.act()
+                start_new_thread(actor.act, ())
             else:
                 actor.frame_count -= 1
-
-        # if hero.frame_count == 0:
-        #     # if the hero has good health and magic, do a magic attack
-        #     if hero.healthy > .5 and hero.magic_load > 0 and hero.get_distance_to_object(enemy1) < 50:
-        #         hero.magic_attack(enemy1)
-        #     # once we run out of magic, do physicalAttack
-        #     elif hero.healthy > 0.5 and hero.get_distance_to_object(enemy1) < 10:
-        #         hero.physical_attack(enemy1)
-        #     # if we take too much damage, hide
-        #     # elif hero.coverage < 1:
-        #         # hero.hide()
-        #         # once we have hidden, take potions to heal
-        #     elif not hero.healthy > 0.5:
-        #         hero.drink_potion()
-        #         # time.sleep(2)
-        #         # hero.return_to_fight()
-        #     else:
-        #         x_movement = ((enemy1.x - hero.x) / hero.get_distance_to_object(enemy1))  # / 2.0
-        #         y_movement = ((enemy1.y - hero.y) / hero.get_distance_to_object(enemy1))  # / 2.0
-        #         hero.x += x_movement
-        #         hero.y += y_movement
-        #         hero.rect.x = int(hero.x)
-        #         hero.rect.y = int(hero.y)
-        # else:
-        #     hero.frame_count -= 1
-        #
-        # if hero.coverage == 0.0:
-        #     if enemy1.rage >= 1.0:
-        #         pass  # enemy.special_attack(hero)
-        #     elif enemy1.magic_load > 0.0:
-        #         pass  # enemy.magic_attack(hero)
-        #     else:
-        #         pass  # enemy.physical_attack(hero)
-        # else:
-        #     print("Hero is hidden!")
 
         screen.fill((0, 0, 0))
 
