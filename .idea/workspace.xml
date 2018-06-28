@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14508437-4431-4f49-a468-5a263c98ca35" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Game-Development.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Game-Development.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Actors/Actor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Actors/Actor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FuzzyLogic.py" beforeDir="false" afterPath="$PROJECT_DIR$/FuzzyLogic.py" afterDir="false" />
@@ -23,8 +21,8 @@
       <file leaf-file-name="FuzzyLogic.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/FuzzyLogic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="41" column="47" lean-forward="true" selection-start-line="41" selection-start-column="47" selection-end-line="41" selection-end-column="47" />
+            <state relative-caret-position="221">
+              <caret line="64" column="39" lean-forward="true" selection-start-line="64" selection-start-column="39" selection-end-line="64" selection-end-column="39" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -35,7 +33,7 @@
       <file leaf-file-name="Shield.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Items/Shield.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
+            <state relative-caret-position="153">
               <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
@@ -66,7 +64,7 @@
         <entry file="file://$PROJECT_DIR$/Items/Item.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
-              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
             </state>
           </provider>
         </entry>
@@ -74,8 +72,8 @@
       <file leaf-file-name="Actor.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Actors/Actor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
+            <state relative-caret-position="438">
+              <caret line="95" column="3" selection-start-line="95" selection-start-column="3" selection-end-line="95" selection-end-column="3" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -87,7 +85,7 @@
         <entry file="file://$PROJECT_DIR$/Actors/Behavior.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
-              <caret line="10" column="55" lean-forward="true" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="55" />
+              <caret line="10" column="55" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -95,8 +93,8 @@
       <file leaf-file-name="Mage.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Actors/Mage.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="48" column="27" lean-forward="true" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="44" />
+            <state relative-caret-position="782">
+              <caret line="48" column="27" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="44" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
               </folding>
@@ -119,7 +117,7 @@
       <file leaf-file-name="Warrior.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Actors/Warrior.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
+            <state relative-caret-position="51">
               <caret line="11" column="66" selection-start-line="11" selection-start-column="66" selection-end-line="11" selection-end-column="66" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
@@ -159,16 +157,15 @@
         <option value="$PROJECT_DIR$/Items/Equipment.py" />
         <option value="$PROJECT_DIR$/Items/Shield.py" />
         <option value="$PROJECT_DIR$/Items/Item.py" />
-        <option value="$PROJECT_DIR$/FuzzyLogic.py" />
         <option value="$PROJECT_DIR$/Actors/Actor.py" />
+        <option value="$PROJECT_DIR$/FuzzyLogic.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-10" />
-    <option name="y" value="-10" />
-    <option name="width" value="1933" />
-    <option name="height" value="1093" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-9" />
+    <option name="width" value="1934" />
+    <option name="height" value="1089" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -199,6 +196,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Alex\Documents\SAI\Github\Game-Development\Actors" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -273,13 +275,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1546" height="874" extended-state="0" />
+    <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24934895" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3285151" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.2759527" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.275817" />
       <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="bottom" id="Python Console" order="8" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -294,6 +295,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3285151" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -669,19 +671,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Actors/Warrior.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="66" selection-start-line="11" selection-start-column="66" selection-end-line="11" selection-end-column="66" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Items/Shield.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
+        <state relative-caret-position="153">
           <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
@@ -705,8 +697,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Actors/Mage.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="48" column="27" lean-forward="true" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="44" />
+        <state relative-caret-position="782">
+          <caret line="48" column="27" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="44" />
           <folding>
             <element signature="e#0#30#0" expanded="true" />
           </folding>
@@ -716,21 +708,31 @@
     <entry file="file://$PROJECT_DIR$/Items/Item.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Actors/Behavior.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
-          <caret line="10" column="55" lean-forward="true" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="55" />
+          <caret line="10" column="55" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Actors/Warrior.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="11" column="66" selection-start-line="11" selection-start-column="66" selection-end-line="11" selection-end-column="66" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/FuzzyLogic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="41" column="47" lean-forward="true" selection-start-line="41" selection-start-column="47" selection-end-line="41" selection-end-column="47" />
+        <state relative-caret-position="221">
+          <caret line="64" column="39" lean-forward="true" selection-start-line="64" selection-start-column="39" selection-end-line="64" selection-end-column="39" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
@@ -739,8 +741,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Actors/Actor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
+        <state relative-caret-position="438">
+          <caret line="95" column="3" selection-start-line="95" selection-start-column="3" selection-end-line="95" selection-end-column="3" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>

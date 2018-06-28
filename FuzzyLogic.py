@@ -5,6 +5,7 @@ from Actors.Warrior import Warrior
 from Actors.Archer import Archer
 from Actors.Faction import Faction
 from _thread import start_new_thread
+from random import uniform
 
 
 def main():
@@ -14,15 +15,42 @@ def main():
     factions.append(Faction("Baddies"))
     factions[1].interactions.append(["Good guys", -10.0])
 
-    hero = Mage(20, 20, "", True)
-    hero.factions.append(factions[0])
-    enemy1 = Archer(1000, 100, "Enemy 1")
-    enemy1.factions.append(factions[1])
-    enemy2 = Warrior(500, 400, "Enemy 2")
-    enemy2.factions.append(factions[1])
+    # hero = Mage(20, 20, "", True)
+    # hero.factions.append(factions[0])
+    # enemy1 = Archer(1000, 100, "Enemy 1")
+    # enemy1.factions.append(factions[1])
+    # enemy2 = Warrior(500, 400, "Enemy 2")
+    # enemy2.factions.append(factions[1])
+
+    for i in range(10):
+        rand = uniform(0,1)
+        heroX = int(uniform(0, 1116))
+        heroY = int(uniform(0, 444))
+        hName = "Hero " + str(i)
+        if rand < 0.3333:
+            hero = Mage(heroX, heroY, hName)
+        elif rand < 0.6666:
+            hero = Archer(heroX, heroY, hName)
+        else:
+            hero = Warrior(heroX, heroY, hName)
+        hero.factions.append(factions[0])
+
+        rand = uniform(0,1)
+        enemyX = int(uniform(0, 1116))
+        enemyY = int(uniform(0, 444))
+        eName = "Enemy " + str(i)
+        if rand < 0.3333:
+            enemy = Mage(enemyX, enemyY, eName)
+        elif rand < 0.6666:
+            enemy = Archer(enemyX, enemyY, eName)
+        else:
+            enemy = Warrior(enemyX, enemyY, eName)
+        enemy.factions.append(factions[1])
+
 
     pygame.init()
     screen = pygame.display.set_mode((1116, 444))
+
 
     clock = pygame.time.Clock()
     running = True
@@ -36,6 +64,7 @@ def main():
 
         for actor in Actor.actors_list:
             if actor.is_dead():
+                Actor.actors_list.remove(actor)
                 continue
 
             if actor.frame_count == 0:

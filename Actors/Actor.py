@@ -3,6 +3,7 @@ import pygame
 from Actors.Behavior import Behavior
 from util import distance
 import time
+from _thread import start_new_thread
 
 
 class Actor:
@@ -33,6 +34,7 @@ class Actor:
         self.current_target = None
         self.factions = []
         self.done_acting = True
+        self.animating = False
         if player:
             self.name = input("What is your name?")
 
@@ -44,12 +46,9 @@ class Actor:
             self.frames_since_behavior_decided += 1
             if self.current_action is None or self.frames_since_behavior_decided >= 70:
                 self.current_action = self.decide_behavior()
-                time.sleep(0.001)
-                self.current_color = (255, 255, 255)
             if self.current_action.perform_action(self):
                 self.current_action = None
             self.done_acting = True
-
 
     def approach(self, params):
         if distance((self.x, self.y), (params[0], params[1])) > params[2]:
@@ -128,7 +127,7 @@ class Actor:
         return random.randint(self.strength - 2, self.strength + 2)
 
     def heal_self(self, params):
-        self.current_color = (0, 255, 0)
+        start_new_thread(self.performAnimation, ("heal",))
         amt_to_heal = self.max_hit_points - self.hit_points
         if amt_to_heal > self.health_potion_remaining:
             amt_to_heal = self.health_potion_remaining
@@ -136,6 +135,7 @@ class Actor:
         self.health_potion_remaining -= amt_to_heal
         self.set_healthy()
         print(self.name + " is Drinking health juice!")
+        time.sleep(0.5);
         return True
 
     def is_dead(self):
@@ -173,3 +173,17 @@ class Actor:
             self.set_healthy()
             print(self.name + ", you've been hit for " + str(amt) + " damage!")
             print(self.name + " health: " + str(self.hit_points))
+            start_new_thread(self.performAnimation, ("take_damage",))
+
+    def performAnimation(self, anim_type):
+        if not self.animating:
+            self.animating = True
+            if anim_type == "heal":
+                self.current_color = (0,150,0)
+                time.sleep(0.5)
+                self.current_color = (255,255,255)
+            elif anim_type == "take_damage":
+                self.current_color = (255, 0, 0)
+                time.sleep(0.5)
+                self.current_color = (255, 255, 255)
+            self.animating = False
